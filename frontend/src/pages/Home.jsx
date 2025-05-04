@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Delhi Traffic Map</h1>
-      <div ref={mapContainer} className="h-[500px] rounded shadow" />
+      <div ref={mapContainer} className="h-[550px] rounded shadow" />
     </div>
   );
 }
