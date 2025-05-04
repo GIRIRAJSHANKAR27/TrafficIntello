@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Traffic Stream</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    select, img {
+      margin-top: 20px;
+    }
+    #stream {
+      border: 4px solid #09f;
+      border-radius: 12px;
+      margin-top: 10px;
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Live Traffic Video Stream</h1>
+  <label for="lane">Select Lane:</label>
+  <select id="lane" onchange="changeLane()">
+    <option value="0">Lane 0</option>
+    <option value="1">Lane 1</option>
+    <option value="2">Lane 2</option>
+    <option value="3">Lane 3</option>
+  </select>
+
+  <img id="stream" src="http://127.0.0.1:5000/video_stream/0" alt="Traffic Video Stream" />
+
+  <script>
+    function changeLane() {
+      const lane = document.getElementById('lane').value;
+      document.getElementById('stream').src = `http://127.0.0.1:5000/video_stream/${lane}`;
+    }
+  </script>
+</body>
+</html>

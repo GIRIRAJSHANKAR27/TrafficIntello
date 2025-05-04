@@ -1,0 +1,70 @@
+# Node.js (Backend)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.env
+/dist
+/build
+/.next
+coverage/
+*.tgz
+*.log
+.DS_Store
+
+# Python (Flask + YOLO/AI)
+*.pyc
+*.pyo
+__pycache__/
+env/
+venv/
+.idea/
+*.db
+*.sqlite3
+*.pkl
+*.pt
+*.h5
+*.log
+
+# Flask venv / Virtualenv
+venv/
+.env/
+
+# Edge AI YOLO Files
+yolov4.weights
+yolov3.weights
+*.pt
+*.h5
+data/
+*.csv
+*.json
+outputs/
+
+# React (Frontend)
+node_modules/
+build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+
+# IDE/Editor Files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS-specific Files
+.DS_Store
+Thumbs.db
+
+# Docker related
+docker-compose.override.yml
+docker-compose.local.yml
+Dockerfile.*
+*.dockerignore
+
+# Logs
+*.log
+logs/
