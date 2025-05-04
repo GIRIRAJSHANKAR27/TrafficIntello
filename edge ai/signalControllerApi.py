@@ -4,11 +4,11 @@ import requests
 import pandas as pd
 from datetime import datetime
 
-# --- Constants ---
+# Constants
 JUNCTION_ID = "01"
 LANES = [0, 1, 2, 3]
-PREDICT_URL = "http://localhost:5001/predict"
-SIGNAL_UPDATE_URL = "http://localhost:3000/api/signals/update"
+PREDICT_URL = "http://localhost:5000/predict"  # We are assuming prediction comes from the main app
+SIGNAL_UPDATE_URL = "http://localhost:3000/api/signals/update"  # This is where signals are updated
 VEHICLE_COUNT_API_TEMPLATE = "http://127.0.0.1:5000/vehicle_count/{}"
 
 CROSSING_TIMES = {
@@ -18,7 +18,6 @@ CROSSING_TIMES = {
     "bus": 6,
 }
 
-# Thread-safe flag for graceful shutdown
 stop_event = threading.Event()
 
 def fetch_weather():
@@ -101,18 +100,13 @@ def signal_controller_loop():
             adjustment_percent = get_adjustment_factor(input_data)
             print(f"Adjustment factor: {adjustment_percent}%")
 
-            # Apply the adjustment factor to the base GST
             final_gst = base_gst * (1 + (adjustment_percent / 100))  # Adjust by the percentage
-
-            # Enforce minimum GST of 5 seconds
-            final_gst = max(5, int(final_gst))
+            final_gst = max(5, int(final_gst))  # Enforce minimum GST of 5 seconds
             print(f"🕒 Final GST for lane {lane}: {final_gst} seconds")
 
             update_signal_state(lane, final_gst)
 
-            time.sleep(final_gst)  
+            time.sleep(final_gst)
 
-if __name__ == "__main__":
-        controller_thread = threading.Thread(target=signal_controller_loop)
-        controller_thread.start()
-        controller_thread.join()
+def run_signal_controller():
+   signal_controller_loop()
