@@ -4,18 +4,18 @@ import requests
 import pandas as pd
 from datetime import datetime
 
-# Constants
+
 JUNCTION_ID = "01"
 LANES = [0, 1, 2, 3]
-PREDICT_URL = "http://localhost:5000/predict"  # We are assuming prediction comes from the main app
-SIGNAL_UPDATE_URL = "http://localhost:3000/api/signals/update"  # This is where signals are updated
+PREDICT_URL = "http://localhost:5000/predict" 
+SIGNAL_UPDATE_URL = "http://localhost:3000/api/signals/update" 
 VEHICLE_COUNT_API_TEMPLATE = "http://127.0.0.1:5000/vehicle_count/{}"
 
 CROSSING_TIMES = {
-    "car": 5,
-    "motorcycle": 3,
-    "truck": 7,
-    "bus": 6,
+    "car": 7,
+    "motorcycle": 4,
+    "truck": 9,
+    "bus": 8,
 }
 
 stop_event = threading.Event()
@@ -48,11 +48,10 @@ def get_adjustment_factor(input_data):
         response = requests.post(PREDICT_URL, json=input_data.to_dict(orient="records")[0])
         response.raise_for_status()
         adjustment_percent = response.json().get("adjustment_factor", 0)
-        return adjustment_percent  # Return percentage (positive or negative)
+        return adjustment_percent  
     except Exception as e:
         print(f"Adjustment fetch error: {e}")
-        return 0  # Default to no adjustment
-
+        return 0  
 def update_signal_state(current_lane, gst):
     signal_state = [{
         "lane": lane,
@@ -100,8 +99,8 @@ def signal_controller_loop():
             adjustment_percent = get_adjustment_factor(input_data)
             print(f"Adjustment factor: {adjustment_percent}%")
 
-            final_gst = base_gst * (1 + (adjustment_percent / 100))  # Adjust by the percentage
-            final_gst = max(5, int(final_gst))  # Enforce minimum GST of 5 seconds
+            final_gst = base_gst * (1 + (adjustment_percent / 100)) 
+            final_gst = max(5, int(final_gst))  
             print(f"🕒 Final GST for lane {lane}: {final_gst} seconds")
 
             update_signal_state(lane, final_gst)

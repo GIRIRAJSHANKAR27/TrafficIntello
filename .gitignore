@@ -21,7 +21,6 @@ venv/
 .idea/
 *.db
 *.sqlite3
-*.pkl
 *.pt
 *.h5
 *.log
@@ -37,7 +36,7 @@ yolov3.weights
 *.h5
 data/
 *.csv
-*.json
+
 outputs/
 
 # React (Frontend)

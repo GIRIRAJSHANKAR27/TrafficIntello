@@ -1,11 +1,11 @@
-# video_worker.py
+
 import cv2
 from ultralytics import YOLO
 import threading
 import time
 
-# Load model only once globally
-model = YOLO("yolov8n.pt")  # Load outside of thread
+
+model = YOLO("yolov8n.pt")  
 
 vehicle_classes = {
     2: "car",
@@ -26,7 +26,7 @@ def start_video_worker(lane_id, video_path):
             cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
 
-        results = model.predict(frame, verbose=False)[0]  # explicitly use .predict
+        results = model.predict(frame, verbose=False)[0] 
 
         counts = {}
         for box in results.boxes:
