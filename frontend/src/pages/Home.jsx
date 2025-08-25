@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useNavigate } from 'react-router-dom';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZGhydXZ2di0wNCIsImEiOiJjbHp4eHhlODEwdHBqMmlzZ3ZvZHYxa3BhIn0.sGikVHF9zf_yV4zsGZVu1Q'; 
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN; 
 
 export default function Home() {
   const mapContainer = useRef(null);

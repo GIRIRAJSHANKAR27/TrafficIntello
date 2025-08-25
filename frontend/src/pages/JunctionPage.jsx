@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import Lane from '../components/Lane';
 
-const socket = io('ws://localhost:3000'); // WebSocket server URL
+const socket_url = import.meta.env.VITE_SOCKET_URL
+const socket = io(socket_url); 
 
 export default function JunctionPage() {
   const { id } = useParams();
